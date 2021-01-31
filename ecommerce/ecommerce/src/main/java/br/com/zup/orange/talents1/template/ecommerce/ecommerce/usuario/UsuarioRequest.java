@@ -57,6 +57,10 @@ public class UsuarioRequest {
 	public String toString() {
 		return "UsuarioRequest [login=" + login + ", senha=" + senha + ", dateCadastro=" + dateCadastro + "]";
 	}
+
+	public Usuario tranformaParaObjeto() {
+		return new Usuario(login, senha, dateCadastro);
+	}
 	
 	
 	
