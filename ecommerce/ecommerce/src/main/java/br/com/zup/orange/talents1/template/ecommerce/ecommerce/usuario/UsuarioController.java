@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 	
 	@PersistenceContext
-	EntityManager manger;
+	EntityManager manager;
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?>salvar(@RequestBody @Valid UsuarioRequest usuarioRequest){
+	public ResponseEntity<UsuarioResponse>salvar(@RequestBody @Valid UsuarioRequest usuarioRequest){
 		Usuario usuario = usuarioRequest.tranformaParaObjeto();
-		return ResponseEntity.ok(usuarioRequest.toString());
+		manager.persist(usuario);
+		return new ResponseEntity<>(UsuarioResponse.transformaParaDTO(usuario), HttpStatus.OK);
 		
 	}
 

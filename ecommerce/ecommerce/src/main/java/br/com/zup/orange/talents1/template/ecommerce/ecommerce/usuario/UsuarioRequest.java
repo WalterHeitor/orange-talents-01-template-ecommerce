@@ -11,10 +11,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.sun.istack.NotNull;
 
+import br.com.zup.orange.talents1.template.ecommerce.ecommerce.validate.UniqueValue;
+
 public class UsuarioRequest {
 	
 	@NotBlank
 	@Email
+	@UniqueValue(domainClass = Usuario.class, 
+	fieldName = "login", message = "Já existe este email cadastrado no banco de dados.")
 	private String login;
 	@NotBlank 
 	@Size(min = 6, message = "A senha deve ter no minimo {min} "

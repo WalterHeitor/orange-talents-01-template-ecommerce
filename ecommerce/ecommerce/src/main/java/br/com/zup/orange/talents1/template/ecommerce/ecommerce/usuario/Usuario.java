@@ -41,6 +41,18 @@ public class Usuario {
 		this.senha = senha;
 		this.dateCadastro = dateCadastro;
 	}
+	public Long getId() {
+		return id;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public LocalDate getDateCadastro() {
+		return dateCadastro;
+	}
 
 	
 }
