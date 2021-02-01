@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
@@ -33,12 +34,11 @@ public class Usuario {
 	@Column(nullable = false)
 	private LocalDate dateCadastro;
 	public Usuario(@NotBlank @Email String login,
-			@NotBlank @Size(min = 6, message = "A senha deve ter no minimo {min} caracteres. "
-					+ "Voçe digitou: ${validateValue} . ") String senha,
+			@Valid @NotNull SenhaLimpa senhaLimpa,
 			@Past(message = "A data deve estar no passado") LocalDate dateCadastro) {
 		super();
 		this.login = login;
-		this.senha = senha;
+		this.senha = senhaLimpa.hash();
 		this.dateCadastro = dateCadastro;
 	}
 	public Long getId() {
