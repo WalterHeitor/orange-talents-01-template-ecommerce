@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private Environment env;
 
 	private static final String[] PUBLIC_MACHERS = { "/h2-console/**" };
-	private static final String[] PUBLIC_MACHERS_GET = { "/usuario/**" };
+	private static final String[] PUBLIC_MACHERS_GET = { "/usuario/**", "/categoria/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
