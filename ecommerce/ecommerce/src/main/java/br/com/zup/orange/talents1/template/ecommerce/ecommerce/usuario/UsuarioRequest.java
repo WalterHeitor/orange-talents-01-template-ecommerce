@@ -63,7 +63,7 @@ public class UsuarioRequest {
 	}
 
 	public Usuario tranformaParaObjeto() {
-		return new Usuario(login, new SenhaLimpa(senha), dateCadastro);
+		return new Usuario(login, new SenhaLimpa(senha), dateCadastro, null);
 	}
 	
 	
