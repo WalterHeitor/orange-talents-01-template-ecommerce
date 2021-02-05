@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-	
-	@PersistenceContext
-	EntityManager manager;
-	
-	@PostMapping
-	@Transactional
-	public ResponseEntity<UsuarioResponse>salvar(@RequestBody @Valid UsuarioRequest usuarioRequest){
-		Usuario usuario = usuarioRequest.tranformaParaObjeto();
-		manager.persist(usuario);
-		return new ResponseEntity<>(UsuarioResponse.transformaParaDTO(usuario), HttpStatus.OK);
-		
-	}
+
+    @PersistenceContext
+    EntityManager manager;
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<UsuarioResponse> salvar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
+        Usuario usuario = usuarioRequest.tranformaParaObjeto();
+        manager.persist(usuario);
+        return new ResponseEntity<>(UsuarioResponse.transformaParaDTO(usuario), HttpStatus.OK);
+
+    }
 
 }

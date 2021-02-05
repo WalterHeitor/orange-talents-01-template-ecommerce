@@ -14,59 +14,57 @@ import com.sun.istack.NotNull;
 import br.com.zup.orange.talents1.template.ecommerce.ecommerce.validate.UniqueValue;
 
 public class UsuarioRequest {
-	
-	@NotBlank
-	@Email
-	@UniqueValue(domainClass = Usuario.class, 
-	fieldName = "login", message = "Já existe este email cadastrado no banco de dados.")
-	private String login;
-	@NotBlank 
-	@Size(min = 6, message = "A senha deve ter no minimo {min} "
-			+ "caracteres. Voçe digitou: ${validateValue} . ")
-	private String senha;
-	@NotNull
-	@Past(message = "A data deve estar no passado")
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
-	private LocalDate dateCadastro;
-	
-	
-	
-	public String getLogin() {
-		return login;
-	}
 
-	public String getSenha() {
-		return senha;
-	}
+    @NotBlank
+    @Email
+    @UniqueValue(domainClass = Usuario.class,
+            fieldName = "login", message = "Já existe este email cadastrado no banco de dados.")
+    private String login;
+    @NotBlank
+    @Size(min = 6, message = "A senha deve ter no minimo {min} "
+            + "caracteres. Voçe digitou: ${validateValue} . ")
+    private String senha;
+    @NotNull
+    @Past(message = "A data deve estar no passado")
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
+    private LocalDate dateCadastro;
 
-	public LocalDate getDateCadastro() {
-		return dateCadastro;
-	}
 
-	public UsuarioRequest() {	}
+    public String getLogin() {
+        return login;
+    }
 
-	public UsuarioRequest(@NotBlank @Email String login, @NotBlank @Size String senha,
-			@Past LocalDate dateCadastro) {
-		super();
-		this.login = login;
-		this.senha = senha;
-		this.dateCadastro = dateCadastro;
-	}
-	
-	public void setDateCadastro(LocalDate dateCadastro) {
-		this.dateCadastro = dateCadastro;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	@Override
-	public String toString() {
-		return "UsuarioRequest [login=" + login + ", senha=" + senha + ", dateCadastro=" + dateCadastro + "]";
-	}
+    public LocalDate getDateCadastro() {
+        return dateCadastro;
+    }
 
-	public Usuario tranformaParaObjeto() {
-		return new Usuario(login, new SenhaLimpa(senha), dateCadastro, null);
-	}
-	
-	
-	
+    public UsuarioRequest() {
+    }
+
+    public UsuarioRequest(@NotBlank @Email String login, @NotBlank @Size String senha,
+                          @Past LocalDate dateCadastro) {
+        super();
+        this.login = login;
+        this.senha = senha;
+        this.dateCadastro = dateCadastro;
+    }
+
+    public void setDateCadastro(LocalDate dateCadastro) {
+        this.dateCadastro = dateCadastro;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioRequest [login=" + login + ", senha=" + senha + ", dateCadastro=" + dateCadastro + "]";
+    }
+
+    public Usuario tranformaParaObjeto() {
+        return new Usuario(login, new SenhaLimpa(senha), dateCadastro);
+    }
+
 
 }

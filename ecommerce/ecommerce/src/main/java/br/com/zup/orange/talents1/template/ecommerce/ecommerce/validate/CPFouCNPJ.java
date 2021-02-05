@@ -19,11 +19,11 @@ import org.hibernate.validator.constraints.br.CPF;
 @CPF
 @CNPJ
 public @interface CPFouCNPJ {
-	
-	String message() default "Insira um CPF ou CNPJ válido.";
 
-    Class<?>[] groups() default { };
+    String message() default "Insira um CPF ou CNPJ válido.";
 
-    Class<? extends Payload>[] payload() default { };
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 
 }

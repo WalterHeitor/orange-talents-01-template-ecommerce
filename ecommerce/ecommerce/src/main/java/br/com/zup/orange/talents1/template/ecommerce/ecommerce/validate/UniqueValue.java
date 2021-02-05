@@ -15,13 +15,13 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueValue {
 
-String message() default ""; 
-	
-	Class<?>[] groups() default { };
-	
-	Class<? extends Payload>[] payload() default { };
-	
-	String fieldName();
-	
-	Class<?> domainClass();
+    String message() default "";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    String fieldName();
+
+    Class<?> domainClass();
 }
