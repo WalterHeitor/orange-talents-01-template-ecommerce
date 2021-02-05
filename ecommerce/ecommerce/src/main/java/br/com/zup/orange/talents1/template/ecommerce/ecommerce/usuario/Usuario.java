@@ -82,7 +82,15 @@ public class Usuario implements UserDetails{
 
 
    
-    @Override
+    public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha + ", dateCadastro=" + dateCadastro
 				+ ", perfis=" + perfis + "]";

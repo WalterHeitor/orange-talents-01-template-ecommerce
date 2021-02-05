@@ -16,9 +16,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import br.com.zup.orange.talents1.template.ecommerce.ecommerce.usuario.UsuarioRepository;
 
 
 @Configuration
@@ -27,12 +30,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Environment env;
+    
+    @Autowired
+    private TokenService tokenService;
 
     @Autowired
     private UserAutenticacao userAutenticacao;
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     private static final String[] PUBLIC_MACHERS = {"/h2-console/**"};
-    private static final String[] PUBLIC_MACHERS_GET = {"/usuario/**"};
+    private static final String[] PUBLIC_MACHERS_POST = {"/usuario/**", "/auth/**"};
 
 
     @Override
@@ -49,21 +58,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        }
 //
 //        http.cors().and().csrf().disable();
-//        http.authorizeRequests()
-//                
-//                .antMatchers(HttpMethod.POST, PUBLIC_MACHERS_GET).permitAll()
-//                .antMatchers(PUBLIC_MACHERS).permitAll()
-//                .anyRequest().authenticated();
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//               // .and().httpBasic()
-//                .and().formLogin();
-    	
     	http
     		.authorizeRequests()
     		.antMatchers(PUBLIC_MACHERS).permitAll()
-    		.antMatchers(PUBLIC_MACHERS_GET).permitAll()
+    		.antMatchers(HttpMethod.POST, PUBLIC_MACHERS_POST).permitAll()
     		.anyRequest().authenticated()
-    		.and().formLogin();
+    		.and().csrf().disable()
+    		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    		.and()
+    		.addFilterBefore(new AutenticacaoViaTokenFilther(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+    		
+    	
+//    	http
+//    		.authorizeRequests()
+//    		.antMatchers(PUBLIC_MACHERS).permitAll()
+//    		.antMatchers(PUBLIC_MACHERS_GET).permitAll()
+//    		.anyRequest().authenticated()
+//    		.and().formLogin();
 
     }
     //cofigurações de autenticação
