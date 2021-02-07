@@ -39,6 +39,12 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas =
 			new HashSet<>();
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens =
+			new HashSet<>();
+	
+	@Deprecated
+	public Produto() { }
 
 	public Produto(@NotBlank String nome, @Positive @Length(max = 1000) int quantidade, @NotBlank String descricao,
 			@Positive BigDecimal valor, Categoria categoria, Usuario usuarioLogado, 
@@ -82,11 +88,23 @@ public class Produto {
 		return true;
 	}
 
+
+	public void associaImagens(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream().map(link -> new ImagemProduto(this, link))
+		.collect(Collectors.toSet());
+		this.imagens.addAll(imagens);
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", quantidade=" + quantidade + ", descricao=" + descricao
 				+ ", valor=" + valor + ", categoria=" + categoria + ", usuarioLogado=" + usuarioLogado
-				+ ", caracteristicas=" + caracteristicas + "]";
+				+ ", caracteristicas=" + caracteristicas + ", imagens=" + imagens + "]";
+	}
+
+	public boolean pertenceAoUsuario(Usuario possivelUsuarioLogado) {
+		// TODO Auto-generated method stub
+		return this.usuarioLogado.equals(possivelUsuarioLogado);
 	}
 
 	
