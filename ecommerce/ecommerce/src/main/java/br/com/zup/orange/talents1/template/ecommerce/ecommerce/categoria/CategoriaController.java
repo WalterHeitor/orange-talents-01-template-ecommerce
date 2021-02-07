@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriaController {
 
     @PersistenceContext
-    EntityManager manager;
+    private EntityManager manager;
 
     @PostMapping
     @Transactional
