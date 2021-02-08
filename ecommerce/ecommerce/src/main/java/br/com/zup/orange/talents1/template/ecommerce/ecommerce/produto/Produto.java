@@ -62,6 +62,10 @@ public class Produto {
 				Assert.isTrue(this.caracteristicas.size() >= 3, "Todo produto prescisa ter no minimo 3"
 						+ " ou mais caracteristicas");
 	}
+	
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
 
 	@Override
 	public int hashCode() {
