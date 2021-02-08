@@ -161,5 +161,10 @@ public class Usuario implements UserDetails{
 		return true;
 	}
 
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return this.login;
+	}
+
 
 }
