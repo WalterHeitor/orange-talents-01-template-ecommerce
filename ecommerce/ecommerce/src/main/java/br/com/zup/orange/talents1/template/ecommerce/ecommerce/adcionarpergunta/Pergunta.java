@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import br.com.zup.orange.talents1.template.ecommerce.ecommerce.produto.Produto;
 import br.com.zup.orange.talents1.template.ecommerce.ecommerce.usuario.Usuario;
 @Entity
-public class Pergunta {
+public class Pergunta implements Comparable<Pergunta>{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -45,6 +45,9 @@ public class Pergunta {
 				+ "]";
 	}
 
+	public String getTitulo() {
+		return titulo;
+	}
 	public Usuario getPerguntador() {
 		return interessada;
 	}
@@ -52,6 +55,14 @@ public class Pergunta {
 	public Usuario getDonoProduto() {
 		// TODO Auto-generated method stub
 		return produto.getUsuarioLogado();
+	}
+	public LocalDate getIntante() {
+		return intante;
+	}
+
+	@Override
+	public int compareTo(Pergunta o) {
+		return this.titulo.compareTo(o.titulo);
 	}
 	
 
