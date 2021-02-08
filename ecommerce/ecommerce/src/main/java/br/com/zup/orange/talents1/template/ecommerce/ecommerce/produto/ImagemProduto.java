@@ -65,5 +65,9 @@ public class ImagemProduto {
 		return "ImagemProduto [id=" + id + ", link=" + link + "]";
 	}
 
+	public String getLink() {
+		return link;
+	}
+
 	
 }
